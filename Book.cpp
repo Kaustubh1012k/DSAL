@@ -106,7 +106,7 @@ public:
     node *create()
     {
         string b;
-        cout << "Enter: ";
+        cout << "Enter (NA for no node): ";
         cin >> b;
         if (b == "NA")
         {
