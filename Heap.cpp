@@ -44,9 +44,11 @@ public:
     {
         while (u > 1 && Minheap[u] < Minheap[u / 2])
         {
+            if(Minheap[u/2]>Minheap[u]){
             int temp = Minheap[u / 2];
             Minheap[u / 2] = Minheap[u];
             Minheap[u] = temp;
+            }
             u = u / 2;
         }
     }
@@ -55,9 +57,11 @@ public:
     {
         while (u > 1 && Maxheap[u] > Maxheap[u / 2])
         {
+            if(Maxheap[u/2]<Maxheap[u]){
             int temp = Maxheap[u / 2];
             Maxheap[u / 2] = Maxheap[u];
             Maxheap[u] = temp;
+            }
             u = u / 2;
         }
     }
