@@ -346,6 +346,7 @@ int main()
         case 7:
             cout << "\n";
             cout << "Dictionary Elements in Descending Order: " << endl;
+            cout<<"\n\tWORD\tMEANING"<<endl;
             obj.mirror(root);
             obj.display(root);
             cout << "\n";
