@@ -135,44 +135,33 @@ public:
 
     node *deleteNode(node *root, string keyword)
     {
+        node *temp;
         if (root == NULL)
             return root;
         if (keyword < root->keyword)
             root->left = deleteNode(root->left, keyword);
         else if (keyword > root->keyword)
             root->right = deleteNode(root->right, keyword);
-        else
+        else if(root->left==NULL || root->right==NULL)
         {
-            // node with only one child or no child
-            if (root->left == NULL)
-            {
-                node *temp = root->right;
-                delete root;
-                return temp;
+            if (root->left != NULL) {
+                root = root->left;
+            } 
+            else {
+                root = root->right;
             }
-            else if (root->right == NULL)
-            {
-                node *temp = root->left;
-                delete root;
-                return temp;
-            }
-            else
-            {
-                // node with two children: get the inorder predecessor (largest
-                // in the left subtree)
-                node *current = root->left;
-                while (current->right != NULL)
-                    current = current->right;
-
-                // Copy the inorder predecessor's content to this node
-                root->keyword = current->keyword;
-                root->meaning = current->meaning;
-
-                // Delete the inorder predecessor
-                root->left = deleteNode(root->left, current->keyword);
-            }
+            cout<<"\nWord Deleted Successfully"<<endl;
         }
-
+        else{
+            temp=root->right;
+            while(temp->left){
+                temp=temp->left;
+            }
+            root->keyword=temp->keyword;
+            root->meaning=temp->meaning;
+            root->right=deleteNode(root->right,temp->keyword);
+        }
+        
         root->h=height(root);
 
         if(BF(root)==2){
@@ -194,6 +183,7 @@ public:
         }
         return root;
     }
+
 
     bool search(node *root, string keyword)
     {
