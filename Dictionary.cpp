@@ -132,12 +132,21 @@ public:
     }
 
     void updation(node *root, string keyword, string meaning)
-    {
-        if (root != NULL)
-        {
-            if (search(root, keyword))
-            {
-                root->meaning = meaning;
+    {   node *t=root;
+        while(t!=NULL){
+            if(keyword==t->keyword){
+                t->meaning=meaning;
+                cout<<"Word Updated Successfully!!!"<<endl;
+                return;
+            }
+            else if(keyword<t->keyword){
+                t=t->left;
+            }
+            else if(keyword>t->keyword){
+                t=t->right;
+            }
+            else{
+                cout<<"Word not Found"<<endl;
             }
         }
     }
