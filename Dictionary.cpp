@@ -57,33 +57,46 @@ public:
     }
 
     node *deleteNode(node *root, string keyword)
-    {
-        node *temp;
-        if (root == NULL)
+    {if (root == NULL)
             return root;
         if (keyword < root->keyword)
             root->left = deleteNode(root->left, keyword);
         else if (keyword > root->keyword)
             root->right = deleteNode(root->right, keyword);
-        else if(root->left==NULL || root->right==NULL)
+        else
         {
-            if (root->left != NULL) {
-                root = root->left;
-            } 
-            else {
-                root = root->right;
+            if (root->left == NULL && root->right == NULL)
+            {
+                delete root;
+                cout << "\nWord Deleted Successfully" << endl;
+                return NULL;
             }
-            cout<<"\nWord Deleted Successfully"<<endl;
-        }
-        else{
-            temp=root->right;
-            while(temp->left){
-                temp=temp->left;
+            else if (root->left == NULL)
+            {
+                node *temp = root->right;
+                delete root;
+                cout << "\nWord Deleted Successfully" << endl;
+                return temp;
             }
-            root->keyword=temp->keyword;
-            root->meaning=temp->meaning;
-            root->right=deleteNode(root->right,temp->keyword);
-        }
+            else if (root->right == NULL)
+            {
+                node *temp = root->left;
+                delete root;
+                cout << "\nWord Deleted Successfully" << endl;
+                return temp;
+            }
+            else
+            {
+                node *t;
+                t = root->right;
+                while (t->left)
+                {
+                    t = t->left;
+                }
+                root->keyword = t->keyword;
+                root->meaning = t->meaning;
+                root->right = deleteNode(root->right, t->keyword);
+            }
         return root;
     }
 
